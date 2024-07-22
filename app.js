@@ -1,4 +1,6 @@
+require('dotenv').config()
 require('ejs');
+
 
 const express = require('express'),
       router = require('./routes');

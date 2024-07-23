@@ -1,11 +1,11 @@
 const router = require('express').Router();
 
 const itemController = require('../controllers/itemController.js');
+const pageController = require('../controllers/pageController.js');
+const db = require("../database");
 
 
-router.get ('/', (req, res) => {
-    res.render('page_home', { user: null});
-});
+router.get ('/', pageController.home);
 
 router.get ('/item/', itemController.index);
 router.post ('/item/', itemController.post);

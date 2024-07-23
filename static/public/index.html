@@ -1,0 +1,147 @@
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+    <section id="todo-items">
+      <div id="todo-add">+ add todo</div>
+    </section>
+
+
+    <script>
+        const todoAdd = document.getElementById("todo-add");
+        const todoItems = document.getElementById("todo-items");
+
+        const items = [];
+
+        const temp = [{
+            id: 0,
+            title: "Dar banho no cachorro",
+            description: "Usar shampoo anti-pulga.",
+            priority: 1,
+            done: false,
+            doneAt: null
+        },{
+            id: 1,
+            title: "Dar banho no gato",
+            description: "Usar shampoo anti-rato.",
+            priority: 2,
+            done: false,
+            doneAt: null
+        },{
+            id: 2,
+            title: "Tomar banho",
+            description: "Usar shampoo anti-capsta.",
+            priority: 0,
+            done: false,
+            doneAt: null
+        }];
+
+
+
+        for(let i = 0; i < temp.length; i++) {
+        const todoItem = CreateTodoItem(temp[i]);
+        todoItems.append(todoItem);
+        
+        items.push({
+            content: temp[i],
+            element: todoItem
+        });
+        }
+
+        let id_ = items.length;
+
+        todoAdd.addEventListener("click", () => {
+        
+        const itemData = {
+            id: id_++,
+            title: "no title",
+            description: "no description",
+            priority: undefined,
+            done: false,
+            doneAt: null
+        }
+                
+        const todoItem = CreateTodoItem(itemData);
+        todoItems.append(todoItem);
+        
+        items.push({
+            content: itemData,
+            element: todoItem
+        });
+        
+        });
+
+
+        function CreateTodoItem(param) {
+        
+        const todoItem = document.createElement("div");
+        todoItem.classList.add("todo-item");
+        
+        const todoDoneButton = document.createElement("button");
+        todoDoneButton.classList.add("todo-done");
+        todoItem.appendChild(todoDoneButton);
+        
+        todoDoneButton.addEventListener("click", () => {
+            EditTodoItem(param.id);
+        });
+
+        const itemDiv = document.createElement("div");
+        itemDiv.classList.add("item");
+        todoItem.appendChild(itemDiv);
+
+        const todoTitle = document.createElement("span");
+        todoTitle.classList.add("todo-title");
+        todoTitle.textContent = param.title;
+        itemDiv.appendChild(todoTitle);
+
+        const todoPriority = document.createElement("span");
+        todoPriority.classList.add("todo-priority");
+        switch(param.priority) {
+            case 2:
+            todoPriority.textContent = "alta";
+        todoPriority.classList.add("todo-priority-alta");
+            break;
+            case 1:
+            todoPriority.textContent = "média";
+            todoPriority.classList.add("todo-priority-media");
+            break;
+            case 0:
+            todoPriority.textContent = "baixa";
+            todoPriority.classList.add("todo-priority-baixa");
+            break;
+            default:
+            todoPriority.textContent = "undefined";
+        }
+        itemDiv.appendChild(todoPriority);
+
+        const todoEditButton = document.createElement("button");
+        todoEditButton.classList.add("todo-edit", "material-symbols-outlined");
+        todoEditButton.textContent = "edit";
+        itemDiv.appendChild(todoEditButton);
+        
+        if(param.done)
+            todoItem.classList.add("todo-item-done");
+
+        return todoItem;
+        }
+
+        function EditTodoItem(itemId) {
+        const todoItem = items.find(item => item.content.id === itemId);
+        if(todoItem == undefined || todoItem == null)
+            return;
+        
+        todoItems.removeChild(todoItem.element);
+        }
+
+        function RemoveTodoItem(itemId) {
+        const todoItem = items.find(item => item.content.id === itemId);
+        if(todoItem == undefined || todoItem == null)
+            return;
+        
+        //items.splice(index, 1);
+        todoItems.removeChild(todoItem.element);
+        }
+    </script>
+</body>

@@ -7,7 +7,7 @@ const express = require('express'),
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('public'));
+app.use(express.static('static'));
 app.set('views','src/views');
 app.set('view engine', 'ejs');
 

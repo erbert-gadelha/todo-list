@@ -3,6 +3,10 @@ const router = require('express').Router();
 const itemController = require('../controllers/itemController.js');
 
 
+router.get ('/', (req, res) => {
+    res.render('page_home', { user: null});
+});
+
 router.get ('/item/', itemController.index);
 router.post ('/item/', itemController.post);
 router.put ('/item/', itemController.put);

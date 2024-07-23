@@ -15,172 +15,51 @@
   <header>
     <div>
       <h1>todo app</h1>
-      <span>
-        Olá, Fulano!
-      </span>
-      <button>
-        logout
-      </button>
+
+      <% if(true){ %>
+        <a href="https://www.google.com">
+          fazer login
+        </a>
+      <% } else{ %>  
+        <span>
+          Olá, <%= user.login %>!
+        </span>
+        <a href="https://www.google.com">
+          logout
+        </a>
+      <% } %>
+
     </div>
     </header>
     
     <div id="main">
-      <form id="create-todo">
-        <input name="name" type="text" placeholder="nome da tarefa" minlength="5" maxlength="50" autocomplete="off"
-         required>
-        <textarea name="description" id="" placeholder="descrição da tarefa" maxlength="140"></textarea>
-        <select name="priority" id="priority-selector" onchange="change_select_color(this)" required>
+      <form id="create-todo" method="post" action="/api/post">
+        <input name="name"
+               type="text"
+               placeholder="nome da tarefa"
+               minlength="5" maxlength="50"
+               autocomplete="off" required
+               <% if(!user){ %> disabled <% } %>  
+               >
+        <textarea name="description" id="" placeholder="descrição da tarefa" maxlength="140" <% if(!user){ %> disabled <% } %>  ></textarea>
+        <select name="priority" id="priority-selector" onchange="change_select_color(this)" required <% if(!user){ %> disabled <% } %>  >
           <option value="" selected disabled hidden>-</option>
           <option value="2">alta</option>
           <option value="1">média</option>
           <option value="0">baixa</option>
         </select>
-        <input type="submit" value="criar tarefa">
+        <input type="submit" value="criar tarefa" <% if(!user){ %> disabled <% } %>>
       </form>
 
       <section id="todo-items">
 
-        <div class="todo-item">
-          <button class="done-todo  material-symbols-outlined">
-            check
-            <span>23/07/2024 13:23</span>
-          </button>
-          <div>
-            <span class="priority" level="0"></span>
-            <h3>Titulo</h3>
-            <button class="edit-todo material-symbols-outlined">
-              edit
-            </button>
-            <span class="description">
-              Dale Dale Dale minha fera
-            </span>
-          </div>
-        </div>
+        <% if(todo_items){ %> 
 
-        <div class="todo-item">
-          <button class="done-todo  material-symbols-outlined" disabled>
-            check
-            <span>23/07/2024 13:23</span>
-          </button>
-          <div>
-            <span class="priority" level="0"></span>
-            <h3>Titulo</h3>
-            <button class="edit-todo material-symbols-outlined">
-              edit
-            </button>
-            <span class="description">
-              Dale Dale Dale minha fera
-            </span>
-          </div>
-        </div>
+            <%for(var i = 0; i < todo_items.length; i++) {%>
+                <%-include('fragment_todo_item', {data: todo_items[i]});%>
+            <%}%>
 
-
-        <div class="todo-item">
-          <button class="done-todo  material-symbols-outlined" disabled>
-            check
-            <span>23/07/2024 13:23</span>
-          </button>
-          <div>
-            <span class="priority" level="0"></span>
-            <h3>Titulo</h3>
-            <button class="edit-todo material-symbols-outlined">
-              edit
-            </button>
-            <span class="description">
-              Dale Dale Dale minha fera
-            </span>
-          </div>
-        </div>
-
-
-        <div class="todo-item">
-          <button class="done-todo  material-symbols-outlined" disabled>
-            check
-            <span>23/07/2024 13:23</span>
-          </button>
-          <div>
-            <span class="priority" level="0"></span>
-            <h3>Titulo</h3>
-            <button class="edit-todo material-symbols-outlined">
-              edit
-            </button>
-            <span class="description">
-              Dale Dale Dale minha fera
-            </span>
-          </div>
-        </div>
-
-
-        <div class="todo-item">
-          <button class="done-todo  material-symbols-outlined" disabled>
-            check
-            <span>23/07/2024 13:23</span>
-          </button>
-          <div>
-            <span class="priority" level="0"></span>
-            <h3>Titulo</h3>
-            <button class="edit-todo material-symbols-outlined">
-              edit
-            </button>
-            <span class="description">
-              Dale Dale Dale minha fera
-            </span>
-          </div>
-        </div>
-
-
-        <div class="todo-item">
-          <button class="done-todo  material-symbols-outlined" disabled>
-            check
-            <span>23/07/2024 13:23</span>
-          </button>
-          <div>
-            <span class="priority" level="0"></span>
-            <h3>Titulo</h3>
-            <button class="edit-todo material-symbols-outlined">
-              edit
-            </button>
-            <span class="description">
-              Dale Dale Dale minha fera
-            </span>
-          </div>
-        </div>
-
-
-        <div class="todo-item">
-          <button class="done-todo  material-symbols-outlined" disabled>
-            check
-            <span>23/07/2024 13:23</span>
-          </button>
-          <div>
-            <span class="priority" level="0"></span>
-            <h3>Titulo</h3>
-            <button class="edit-todo material-symbols-outlined">
-              edit
-            </button>
-            <span class="description">
-              Dale Dale Dale minha fera
-            </span>
-          </div>
-        </div>
-
-
-        <div class="todo-item">
-          <button class="done-todo  material-symbols-outlined" disabled>
-            check
-            <span>23/07/2024 13:23</span>
-          </button>
-          <div>
-            <span class="priority" level="0"></span>
-            <h3>Titulo</h3>
-            <button class="edit-todo material-symbols-outlined">
-              edit
-            </button>
-            <span class="description">
-              Dale Dale Dale minha fera
-            </span>
-          </div>
-        </div>
+        <% } %>
 
 
       </section>

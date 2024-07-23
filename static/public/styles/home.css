@@ -1,153 +1,323 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
---color-0: white;
---color-1: rgba(23, 23, 23, 1);
---color-2: rgba(23, 23, 23, 1);
---color-3: rgba(23, 23, 23, 0.6);
---color-alta: rgba(233, 27, 27, 1);
---color-media: rgba(233, 150, 27, 1);
---color-baixa: rgba(82, 186, 45, 1);
+  --color-0: #F6F6F6;
+  --color-1: #52BA2D;
+  --color-2: #CDFFBB;
+
+  --color-alta: rgba(233, 27, 27, 1);
+  --color-media: rgba(233, 150, 27, 1);
+  --color-baixa: rgba(82, 186, 45, 1);
 }
 
 * {
-margin: 0;
-padding: 0;
-font-family: "Poppins", sans-serif;
-box-sizing: border-box;
-border: none;
-}
-
-body {
-display: flex;
-justify-content: center;
-align-items: center;
-
-height: 100vh;
-
-background-color: white;
-}
-
-#todo-items {
---button-size: 25px;
-max-height: 80%;
-overflow: auto;
-
-display: grid;
-grid-template-columns: [container-start selector-start] var(--button-size) [selector-end item-start] 0px [title-start] auto [title-end priority-start] 90px [priority-end edit-start] var(--button-size) [edit-end] 0px [item-end container-end];
-
-grid-auto-rows: auto;
-
-gap: 6px;
-width: fit-content;
-width: 100%;
-max-width: 600px;
-margin: 0 20px;
-height: fit-content;
-padding: 10px;
-border-radius: 8px;
-background-color: var(--color-0);
-box-shadow: 0 0 0px 6px var(--color-1), 0 -12px 0px 6px var(--color-1);
-
-}
-
-#todo-add {
-padding: 6px;
-height: fit-content;
-grid-column: container-start/container-end;
-grid-row: span;
-background-color: var(--color-2);
-cursor: pointer;
-color: var(--color-0);
-border-radius: 8px;
-}
-
-.todo-item {
-display: grid;
-grid-column: container-start/container-end;
-grid-row: span;
-
-grid-template-columns: subgrid;
-
-
-.todo-done {
-    position: relative;
-    height: var(--button-size);
-    margin: auto 0;
-    cursor: pointer;
-    border-radius: 6px;
-    background-color: var(--color-3);
-}
-
-.todo-edit {
-    background-color: var(--color-0);
-    height: var(--button-size);
-    cursor: pointer;
-    border-radius: 6px;
-}
-
-.todo-priority {
-    color: white;
-    background-color: gray;
-    grid-column: priority-start/priority-end;
-    border-radius: 50px;
-    text-align: center;
-    
-    &.todo-priority-alta {
-    background-color: var(--color-alta);
-    }
-    &.todo-priority-media {
-    background-color: var(--color-media);
-    }
-    &.todo-priority-baixa {
-    background-color: var(--color-baixa);
-    }
-}
-
-.todo-title {
-    grid-column: title-start/title-end;
-    color: var(--color-0);
-    font-weight: normal;
-    
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
-    text-justify: center;
-    vertical-align: middle;
-    line-height: 20px;
-}
-
-div {
-    box-sizing: content-box;
-    padding: 8px 0px;
-    display: grid;
-    grid-column: item-start/item-end;
-    grid-template-columns: subgrid;
-    border-radius: 8px;
-    background-color: var(--color-2);
-}
-
-
-}
-
-.todo-item-done {
-
-.todo-done:after {
-    content:"✓";
-    width: 100%;
-    height: 100%;
-    color: var(--color-0);
-}
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  border: none;
 }
 
 
 header {
-    width: 100%;
+  /*background-color: red;*/
+  background-color: transparent;
+  width: 100%;
+  height: 80px;
+  div:hover {
+    opacity: 1;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+
+  div {
+    opacity: .8;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
+    transition-property: opacity, box-shadow;
+    transition-duration: 100ms;
+    transition-timing-function: linear;
+    
     position: fixed;
-    top: 0;
-    left: 0;
+    z-index: 100;
+    width: calc(100% - 32px);
+    display: flex;
+    background-color: var(--color-0);
+    margin: 8px 16px;
+    padding: 8px 16px;
+    border-radius: 16px;
+    align-items: center;
+    gap: 16px;
+    
+    h1 {
+      flex: 1;
+      font-size: 1.3rem;
+    }
+    
+    span {
+      font-size: 0.9rem;
+    }
+    
+    button {
+      font-size: 0.9rem;
+      border-radius: 32px;
+      background-color: var(--color-1);
+      padding: 8px 32px;
+      cursor: pointer;
+    }
+    button:hover {
+      color: white;
+      outline: gray solid 1px;
+    }
+
+  }
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+#create-todo {
+  background-color: red;
+  width: calc(100% - 32px);
+  max-width: 500px;
+
+  display: grid;
+  border-radius: 24px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: var(--color-0);
+
+  --line-size: 40px;
+  
+  grid-template-columns: [container-start] 16px [name-start description-start] auto [priority-start] 120px [priority-end submit-start] 160px [submit-end description-end name-end] 16px [container-end];
+  grid-template-rows: [container-start] 16px [name-start] var(--line-size)[name-end description-start] calc(var(--line-size) * 2) [description-end priority-start submit-start] var(--line-size) [priority-end submit-end] 16px [container-end];;
+  gap: 8px;
+
+  >* {
+    border-radius: 20px;
+    padding: 0 16px;
+    border: 1px lightgray solid;
+  }
+
+  >*:focus {
+    background-color: var(--color-2);
+    outline: none;
+  }
+
+  input[type=text] {
+    grid-area: name;
+  }
+  textarea {
+    padding: 8px 16px;
+    grid-area: description;
+    resize: none;
+
+  }
+  select {
+    grid-area: priority;
+    text-align: center;
+    font-weight: bold;
+    background-color: gray;
+  }
+
+  input[type=submit] {
+    grid-area: submit;
     background-color: var(--color-1);
-    padding: 8px;
-    color: var(--color-0);
+    cursor: pointer
+  }
+
+  input[type=submit]:hover {
+    color: white;
+    border: gray solid 1px;
+  }
+}
+
+#todo-items {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 16px 0;
+
+    .todo-item {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+
+        button {
+            margin: auto;
+            border-radius: 40px;
+            cursor: pointer;
+            background-color: #52BA2D;
+        }
+        
+
+        .edit-todo {
+          font-size: 20px;
+          width: 30px;
+          height: 30px;
+          color: white;
+        }
+
+        .edit-todo:hover {
+          margin: auto;
+          background-color: white;
+          color: #52BA2D;
+          border: solid 1px #52BA2D;
+        }
+
+        .done-todo {
+          width: 33px;
+          height: 30px;
+          font-size: 20px;
+          color: gray;
+          border: 1px solid gray;
+          background-color: transparent;
+          position: relative;
+
+          span {
+            display: none;
+          }
+
+        }
+
+        .done-todo:not(:disabled):hover {
+          background-color: #52BA2D;
+          color: white;
+        }
+
+        .done-todo:disabled {
+          border: none;
+          background-color: gray;
+          color: white;
+          cursor: auto;
+
+          span {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 120%;
+            font-size: .75rem;
+            z-index: 100;
+            padding: 8px 16px;
+            border-radius: 8px;
+
+            width: fit-content;
+
+            background-color: black;
+            color: white;
+            opacity: 0;
+            
+            pointer-events: none;
+            transition: 100ms opacity linear;
+        }
+
+        span:after {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            top: calc(50% - 4px);
+            left: -4px;
+            z-index: -1;
+            transform: rotateZ(45deg);
+            margin: auto;
+            background-color: black;
+        }
+        }
+        .done-todo:disabled:hover {
+          span {
+            transition: 100ms 150ms opacity linear;
+            opacity: .85;
+          }
+        }
+        div:hover {
+          background-color: var(--color-2);
+
+        }
+    
+        div {
+            position: relative;
+            width: 100%;
+            /*background-color: #52BA2D;*/
+            border-radius: 40px;
+            display: flex;
+            padding: 8px;
+            gap: 8px;
+
+
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            background-color: var(--color-0);
+    
+            h3 {
+                text-align: center;
+                flex: 1;
+            }
+
+            .priority {
+              height: 10px;
+              width: 10px;
+              margin: auto;
+              margin-left: 8px;
+              border-radius: 100%;
+              background-color: gray;
+
+              &[level="0"] {
+                background-color: var(--color-baixa);
+              }
+              &[level="1"] {
+                background-color: var(--color-media);
+              }
+              &[level="2"] {
+                background-color: var(--color-alta);
+              }
+            }
+
+            .description {
+                position: absolute;
+                bottom: -45px;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                padding: 8px;
+                border-radius: 8px;
+
+                margin: auto;
+
+                width: 300px;
+
+                background-color: black;
+                /*background-color: rgba(0, 0, 0, 0.75);*/
+                color: white;
+                opacity: 0;
+                /*display: none;*/
+                pointer-events: none;
+                transition: 100ms opacity linear;
+            }
+
+            .description:after {
+                content: "";
+                position: absolute;
+                width: 8px;
+                height: 8px;
+                top: -4px;
+                left: 0;
+                right: 0;
+                transform: rotateZ(45deg);
+                margin: auto;
+                background-color: black;
+            }
+        }
+        div:hover {
+          .description {
+                transition: 100ms 300ms opacity linear;
+                /*display: block;*/
+                opacity: .85;
+            }
+        }
+    }
+
 }

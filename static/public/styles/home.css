@@ -149,11 +149,17 @@ header {
         display: flex;
         gap: 8px;
 
-        button {
-            margin: auto;
-            border-radius: 40px;
-            cursor: pointer;
-            background-color: #52BA2D;
+        .done-todo, .edit-todo {
+          margin: auto;
+          border-radius: 40px;
+          cursor: pointer;
+          background-color: #52BA2D;
+          text-decoration: none;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
         }
         
 
@@ -186,16 +192,18 @@ header {
 
         }
 
-        .done-todo:not(:disabled):hover {
+        .done-todo:not(.disabled):hover {
           background-color: #52BA2D;
           color: white;
         }
 
-        .done-todo:disabled {
+        .done-todo.disabled {
           border: none;
           background-color: gray;
           color: white;
           cursor: auto;
+
+
 
           span {
             display: block;
@@ -230,7 +238,7 @@ header {
             background-color: black;
         }
         }
-        .done-todo:disabled:hover {
+        .done-todo.disabled:hover {
           span {
             transition: 100ms 150ms opacity linear;
             opacity: .85;

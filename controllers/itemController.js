@@ -40,7 +40,7 @@ module.exports = {
             conn = await db.getConnection();
 
             //const query = `UPDATE tb_todo SET done = true, doneAt = CURRENT_TIMESTAMP() WHERE user_id="${req.user.id}" AND id="${req.params.id}";`;
-            const query = `UPDATE tb_todo SET done = true, doneAt = CURRENT_TIMESTAMP() WHERE id="${req.params.id}";`;
+            const query = `UPDATE tb_todo SET done = true, doneAt = CURRENT_TIMESTAMP() WHERE id="${req.params.id}" AND user_id="${req.user.id}";`;
 
             await conn.query(query);
             res.redirect("/");

@@ -1,16 +1,16 @@
 <div class="todo-item">
-    <button class="done-todo  material-symbols-outlined" <%= data.done == true ? 'disabled' : '' %>>
+    <a class="done-todo  material-symbols-outlined <%=(data.done==1)?'disabled':''%> " href="/set_as_done/<%=data.id%>">
       check
       
       <span><%= data.doneAt %></span>
 
-    </button>
+    </a>
     <div>
       <span class="priority" level="<%=data.priority%>"></span>
-      <h3> <%=data.name%> </h3>
-      <button class="edit-todo material-symbols-outlined">
+      <h3> <%=data.name%> <%= data.done %> </h3>
+      <a class="edit-todo material-symbols-outlined" href="/edit/<%=data.id%>">
         edit
-      </button>
+      </a>
       <span class="description">
         <%=data.description%> 
       </span>

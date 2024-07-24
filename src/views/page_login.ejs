@@ -12,11 +12,14 @@
 </head>
 
 <body>
-    <h1>todo app</h1>
+    <a href="/" class="app-title">
+      <h1>todo app</h1>
+    </a>
     
-    <form class="login-form"action="post">
-        <input type="password" placeholder="senha" minlength="4" maxlength="20" required>
-        <input type="text" placeholder="login"  minlength="5" autocomplete="false" required>
+    <form class="login-form" method="post" action="api/login">
+        <input name="password" type="password" placeholder="senha" minlength="4" maxlength="20" required>
+        <input name="login" type="text" placeholder="login"  minlength="5" autocomplete="false" required>
+        <a href="/register">criar usuário</a>
         <input type="submit" value="entrar">
     </form>
 </body>

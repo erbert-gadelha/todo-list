@@ -16,15 +16,15 @@
     <div>
       <h1>todo app</h1>
 
-      <% if(true){ %>
-        <a href="https://www.google.com">
+      <% if(!user){ %>
+        <a href="/login">
           fazer login
         </a>
       <% } else{ %>  
         <span>
-          Olá, <%= user.login %>!
+          Olá, <%= user.name %>!
         </span>
-        <a href="https://www.google.com">
+        <a href="/logout">
           logout
         </a>
       <% } %>

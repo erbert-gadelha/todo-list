@@ -12,12 +12,15 @@
 </head>
 
 <body>
-    <h1>todo app</h1>
+    <a href="/" class="app-title">
+      <h1>todo app</h1>
+    </a>
     
-    <form class="login-form"action="post">
-        <input type="text" placeholder="nome"  minlength="5" maxlength="50" autocomplete="false" required>
-        <input type="text" placeholder="login"  minlength="5" maxlength="50" autocomplete="false" required>
-        <input type="password" placeholder="senha" minlength="4" maxlength="20" required>
+    <form class="login-form" method="post" action="api/register">
+        <input name="name" type="text" placeholder="nome"  minlength="5" maxlength="50" autocomplete="false" required>
+        <input name="login" type="text" placeholder="login"  minlength="5" maxlength="50" autocomplete="false" required>
+        <input name="password" type="password" placeholder="senha" minlength="4" maxlength="20" required>
+        <a href="/login">fazer login</a>
         <input type="submit" value="registrar">
     </form>
 </body>

@@ -4,6 +4,7 @@ require('passport-local').Strategy;
 require('passport').session
 
 const db = require('../database');
+const itemController = require('../controllers/itemController');
 
 
 module.exports = {
@@ -43,4 +44,19 @@ module.exports = {
         else
             res.render('page_register');
     },
+    "edit": async (req, res) => {
+        if(!req.user) {
+            res.redirect("/");
+            return;
+        }
+
+        const id = req.params.id;
+        if(isNaN(id)) {
+            res.redirect("/");
+            return;
+        }
+
+        const data = await itemController.read(req.user, req.params.id);
+        res.render('page_edit_item', {user: req.user, data: data});
+    }
 };

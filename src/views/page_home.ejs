@@ -12,25 +12,8 @@
 </head>
 
 <body>
-  <header>
-    <div>
-      <h1>todo app</h1>
 
-      <% if(!user){ %>
-        <a href="/login">
-          fazer login
-        </a>
-      <% } else{ %>  
-        <span>
-          Olá, <%= user.name %>!
-        </span>
-        <a href="/logout">
-          logout
-        </a>
-      <% } %>
-
-    </div>
-    </header>
+  <%-include('fragment_header', {user: user});%>
     
     <div id="main">
       <form id="create-todo" method="post" action="/api/todo">

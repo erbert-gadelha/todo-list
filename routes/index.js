@@ -11,12 +11,13 @@ router.get ('/login', pageController.login);
 router.get ('/logout', userController.logout);
 router.get ('/register', pageController.register);
 router.get ('/logout', userController.logout);
-router.post ('/api/register', userController.create);
+router.get ('/edit/:id', pageController.edit);
 
 
 router.post ('/api/todo', itemController.create);
-router.put ('/api/todo', itemController.edit);
-router.delete ('/api/todo', itemController.delete);
+router.post ('/api/edit/:id', itemController.edit);
+router.get ('/api/delete/:id', itemController.delete);
+router.post ('/api/register', userController.create);
 
 
 router.get ('/set_as_done/:id', itemController.done);

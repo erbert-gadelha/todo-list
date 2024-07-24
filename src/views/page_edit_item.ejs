@@ -1,0 +1,55 @@
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/public/styles/edit_item.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+  <script src="script.js"></script>
+</head>
+
+<body>
+    
+
+  <%-include('fragment_header', {user: user});%>
+    
+    <div id="main">
+      <form id="create-todo" method="post" action="/api/edit/<%=data.id%>">
+        <input name="name" type="text" placeholder="nome da tarefa" minlength="5" maxlength="50" autocomplete="off"
+         required value="<%=data.name%>">
+        <textarea name="description" id="" placeholder="descrição da tarefa" maxlength="140"><%=data.description%></textarea>
+        <input name="doneAt" type="date" value="<%=data.doneAt%>">
+        <select name="priority" id="priority-selector" onchange="change_select_color(this)">
+          <option value="2" <%=data.priority==2?"selected":""%> >alta</option>
+          <option value="1" <%=data.priority==1?"selected":""%> >média</option>
+          <option value="0" <%=data.priority==0?"selected":""%> >baixa</option>
+        </select>
+        
+        <div class="checkbox-done">
+          <label for="done">concluido</label>
+          <input name="done" type="checkbox" class="sc-gJwTLC ikxBAC" <%=data.done==1?"checked":""%>>
+        </div>
+        
+        <input type="submit" value="alterar">
+
+        <a id="delete-item" href="/api/delete/<%=data.id%>">
+            <span class="material-symbols-outlined">
+                delete
+                </span>
+          </a>
+      </form>
+
+
+
+</body>
+  
+  
+<script>
+    function change_select_color(element) {
+        const colors = ["rgba(82, 186, 45, 1)", "rgba(233, 150, 27, 1)", "rgba(233, 27, 27, 1)"];
+        element.style.color = colors[element.value]; 
+        element.style.backgroundColor = "white"; 
+    }
+</script>

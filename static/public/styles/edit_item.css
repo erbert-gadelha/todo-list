@@ -56,16 +56,14 @@ header {
       font-size: 0.9rem;
     }
     
-    > a {
+    button {
       font-size: 0.9rem;
       border-radius: 32px;
       background-color: var(--color-1);
       padding: 8px 32px;
       cursor: pointer;
-      color: black;
-      text-decoration: none;
     }
-    a:hover {
+    button:hover {
       color: white;
       outline: gray solid 1px;
     }
@@ -82,7 +80,8 @@ header {
 }
 
 #create-todo {
-  background-color: red;
+  position: relative;
+  
   width: calc(100% - 32px);
   max-width: 500px;
 
@@ -93,8 +92,10 @@ header {
 
   --line-size: 40px;
   
-  grid-template-columns: [container-start] 16px [name-start description-start] auto [priority-start] 120px [priority-end submit-start] 160px [submit-end description-end name-end] 16px [container-end];
-  grid-template-rows: [container-start] 16px [name-start] var(--line-size)[name-end description-start] calc(var(--line-size) * 2) [description-end priority-start submit-start] var(--line-size) [priority-end submit-end] 16px [container-end];;
+  grid-template-columns: [container-start] 16px [name-start description-start] auto [priority-start] 120px [done-start] auto [done-end priority-end submit-start doneAt-start] 160px [submit-end description-end name-end doneAt-end] 16px [container-end];
+  
+  
+  grid-template-rows: [container-start] 16px [name-start] var(--line-size)[name-end description-start] calc(var(--line-size) * 2) [description-end done-start doneAt-start] var(--line-size) [done-end doneAt-end priority-start submit-start] var(--line-size) [priority-end submit-end] 16px [container-end];
   gap: 8px;
 
   >* {
@@ -108,7 +109,7 @@ header {
     outline: none;
   }
 
-  input[type=text] {
+  input[name=name] {
     grid-area: name;
   }
   textarea {
@@ -128,6 +129,29 @@ header {
     grid-area: submit;
     background-color: var(--color-1);
     cursor: pointer
+  }
+  
+  
+  /*input[name=done] {
+    grid-area: done;
+    background-color: var(--color-1);
+  }*/
+  
+  .checkbox-done {
+    display: flex;
+    gap: 8px;
+    grid-area: done;
+    height: fit-content;
+    width: fit-content;
+    margin: auto;
+    border: none;
+    
+  }
+  
+  
+  input[name=doneAt] {
+    grid-area: doneAt;
+    background-color: white;
   }
 
   input[type=submit]:hover {
@@ -149,17 +173,11 @@ header {
         display: flex;
         gap: 8px;
 
-        .done-todo, .edit-todo {
-          margin: auto;
-          border-radius: 40px;
-          cursor: pointer;
-          background-color: #52BA2D;
-          text-decoration: none;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
+        button {
+            margin: auto;
+            border-radius: 40px;
+            cursor: pointer;
+            background-color: #52BA2D;
         }
         
 
@@ -192,18 +210,16 @@ header {
 
         }
 
-        .done-todo:not(.disabled):hover {
+        .done-todo:not(:disabled):hover {
           background-color: #52BA2D;
           color: white;
         }
 
-        .done-todo.disabled {
+        .done-todo:disabled {
           border: none;
           background-color: gray;
           color: white;
           cursor: auto;
-
-
 
           span {
             display: block;
@@ -238,7 +254,7 @@ header {
             background-color: black;
         }
         }
-        .done-todo.disabled:hover {
+        .done-todo:disabled:hover {
           span {
             transition: 100ms 150ms opacity linear;
             opacity: .85;
@@ -330,4 +346,83 @@ header {
         }
     }
 
+}
+
+
+
+
+#delete-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    position: absolute;
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    right: -8px;
+    top: -8px;
+}
+
+#delete-item:hover {
+    background-color: darkred;
+}
+
+
+
+
+
+
+
+
+/**Component pego na https://getcssscan.com/css-checkboxes-examples**/
+.checkbox-done {
+  
+  input {
+    appearance: none;
+    background-color: #dfe1e4;
+    border-radius: 72px;
+    border-style: none;
+    flex-shrink: 0;
+    height: 20px;
+    margin: 0;
+    position: relative;
+    width: 30px;
+  }
+
+  input::before {
+    bottom: -6px;
+    content: "";
+    left: -6px;
+    position: absolute;
+    right: -6px;
+    top: -6px;
+  }
+
+  input, input::after {
+    transition: all 100ms ease-out;
+  }
+
+  input::after {
+    background-color: #fff;
+    border-radius: 50%;
+    content: "";
+    height: 14px;
+    left: 3px;
+    position: absolute;
+    top: 3px;
+    width: 14px;
+  }
+
+  input:checked {
+    background-color: var(--color-1);
+  }
+
+  input:checked::after {
+    background-color: #fff;
+    left: 13px;
+  }
 }

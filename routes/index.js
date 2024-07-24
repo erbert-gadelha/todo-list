@@ -7,11 +7,12 @@ const db = require("../database");
 
 
 router.get ('/', pageController.home);
-
-router.get ('/register', userController.index);
-router.get ('/register', userController.register);
-//router.post ('/login', userController.login);
-router.post ('/register', userController['create-user']);
+router.get ('/login', pageController.login);
+router.get ('/logout', userController.logout);
+router.get ('/register', pageController.register);
+router.get ('/logout', userController.logout);
+//router.post ('/api/login', userController.authenticate);
+router.post ('/api/register', userController.create);
 
 
 router.get ('/item/', itemController.index);

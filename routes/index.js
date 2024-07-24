@@ -11,13 +11,14 @@ router.get ('/login', pageController.login);
 router.get ('/logout', userController.logout);
 router.get ('/register', pageController.register);
 router.get ('/logout', userController.logout);
-//router.post ('/api/login', userController.authenticate);
 router.post ('/api/register', userController.create);
 
 
-router.get ('/item/', itemController.index);
-router.post ('/item/', itemController.post);
-router.put ('/item/', itemController.put);
-router.delete ('/item/', itemController.delete);
+router.post ('/api/todo', itemController.create);
+router.put ('/api/todo', itemController.edit);
+router.delete ('/api/todo', itemController.delete);
+
+
+router.get ('/set_as_done/:id', itemController.done);
 
 module.exports = router;

@@ -11,12 +11,12 @@ module.exports = {
         const user = req.user;
         
         let rows = [];
-        if(false && user != null && user != undefined) {
+        if(user) {
 
             let conn;
             try {
                 conn = await db.getConnection();
-                const query = `SELECT * FROM tb_todo WHERE email="${2}"`;
+                const query = `SELECT * FROM tb_todo WHERE user_id="${req.user.id}" ORDER BY id DESC`;
                 rows = await conn.query(query);
     
             } catch (err) {
